@@ -130,7 +130,7 @@ function App() {
         color: '#fff',
         boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
       }}>
-        <h3 style={{ margin: '0 0 10px 0', color: '#ffb347', fontSize: '1.2rem' }}>PixelWar</h3>
+        <h3 style={{ margin: '0 0 10px 0', color: '#ffb347', fontSize: '1.2rem' }}>PixelNet</h3>
         <div style={{ marginBottom: 10 }}>
           <label style={{ display: 'block', marginBottom: 5, fontSize: '0.9rem' }}>Couleur :</label>
           <input type="color" value={selectedColor} onChange={e => setSelectedColor(e.target.value)} style={{ width: '100%', height: '30px' }} />
