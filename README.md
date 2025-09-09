@@ -11,11 +11,25 @@ Un projet de jeu collaboratif de pixels inspiré de r/place, développé en arch
 
 ## ✨ Fonctionnalités
 
-- 🔐 **Authentification utilisateur** - Inscription et connexion sécurisées
 - 🎨 **Grille de pixels interactive** - Canvas collaboratif en temps réel
 - 🌈 **Coloration de pixels** - Palette de couleurs pour personnaliser
+- ⏱️ **Limitation par IP** - Un pixel toutes les 5 minutes par ordinateur (détection par adresse IP)
+- 🔒 **Anti-spam intégré** - Système de cooldown automatique sans authentification
 - 🏆 **Système de scores** - Classement des contributions utilisateurs
 - 🔄 **Synchronisation temps réel** - Mise à jour instantanée des pixels
+
+## 🎮 Règles du jeu
+
+### Limitation temporelle
+- **Cooldown de 5 minutes** : Chaque ordinateur (identifié par son adresse IP) ne peut placer qu'un seul pixel toutes les 5 minutes
+- **Aucune authentification requise** : Pas besoin de créer un compte, le jeu est accessible immédiatement
+- **Protection anti-spam** : Le système bloque automatiquement les tentatives de placement multiple depuis la même IP
+
+### Mécanisme de fonctionnement
+1. Un utilisateur clique sur un pixel et choisit une couleur
+2. L'adresse IP est enregistrée avec l'horodatage
+3. Pendant 5 minutes, cette IP ne peut plus placer de pixel
+4. Un timer s'affiche pour indiquer le temps restant avant le prochain placement
 
 ## 📁 Structure du projet
 
@@ -95,6 +109,7 @@ pixelnet/
 ### Backend
 - **Express.js** - Framework web Node.js
 - **Mongoose** - ODM pour MongoDB
+- **Rate limiting par IP** - Gestion du cooldown de 5 minutes par adresse IP
 
 ### Frontend  
 - **React 18** - Bibliothèque UI avec hooks
