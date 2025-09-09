@@ -1,0 +1,33 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+* {
+  cursor: auto !important;
+}
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  color: #ffb347;
+  text-shadow: 2px 2px 8px #222;
+}
+div[style*='grid'] {
+  margin: 0 auto;
+  width: 100vw;
+  background: #222;
+  display: grid;
+  grid-template-columns: repeat(200, 1fr);
+  gap: 0px;
+}
