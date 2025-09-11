@@ -1,0 +1,16 @@
+# Fichiers et dossiers à ignorer par Docker
+node_modules
+npm-debug.log
+.git
+.gitignore
+README.md
+.env
+.nyc_output
+coverage
+.DS_Store
+*.log
+dist
+build
+
+# MongoDB data (sera géré par les volumes Docker)
+mongodb-data/

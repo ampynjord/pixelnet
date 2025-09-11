@@ -1,0 +1,67 @@
+services:
+  # Service MongoDB
+  mongodb:
+    image: mongo:7.0
+    container_name: pixelnet-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGODB_DATABASE}
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - pixelnet-network
+
+  # Service Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pixelnet-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=${PORT:-3001}
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongodb
+    networks:
+      - pixelnet-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  # Service Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pixelnet-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:3001}
+    depends_on:
+      - backend
+    networks:
+      - pixelnet-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
+# Volumes persistants
+volumes:
+  mongodb_data:
+
+# Réseau
+networks:
+  pixelnet-network:
+    driver: bridge

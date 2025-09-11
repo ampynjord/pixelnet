@@ -7,7 +7,8 @@ app.use(cors());
 app.use(express.json());
 
 // Connexion à la BDD MongoDB
-mongoose.connect('mongodb://localhost:27017/pixelwar', { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/pixelnet';
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Stockage en mémoire des IPs et leur dernier placement (cooldown)
 const ipCooldowns = new Map();
@@ -53,6 +54,21 @@ const Pixel = mongoose.model('Pixel', new mongoose.Schema({
   owner: String,
   timestamp: { type: Date, default: Date.now }
 }));
+
+// Route racine - Information sur l'API
+app.get('/', (req, res) => {
+  res.json({
+    name: 'Pixelnet API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      'GET /api/pixels': 'Récupérer tous les pixels',
+      'POST /api/pixels': 'Placer un nouveau pixel',
+      'GET /api/cooldown': 'Vérifier le statut du cooldown'
+    },
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
+});
 
 // Routes API
 app.get('/api/pixels', async (req, res) => {
@@ -122,6 +138,7 @@ app.post('/api/pixels', checkIPCooldown, async (req, res) => {
   }
 });
 
-app.listen(3001, () => {
-  console.log('Backend PixelWar démarré sur le port 3001');
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Backend PixelNet démarré sur le port ${PORT}`);
 });
