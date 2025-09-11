@@ -1,6 +1,6 @@
 # Pixelnet
 
-Application collaborative de placement de pixels.
+Application collaborative de placement de pixels. Inspirée par le projet Reddit r/place.
 
 ## Installation
 
