@@ -1,10 +1,10 @@
 # Pixelnet
 
-Application collaborative de placement de pixels. Inspirée par le projet Reddit r/place.
+Collaborative pixel-placing application, inspired by Reddit's r/place.
 
 ## Installation
 
-Requiert [Docker](https://www.docker.com/)
+Requires [Docker](https://www.docker.com/).
 
 ```bash
 git clone https://github.com/ampynjord/pixelnet.git
@@ -12,53 +12,53 @@ cd pixelnet
 cp .env.example .env
 ```
 
-## Utilisation
+## Usage
 
 ```bash
-# Démarrer
+# Start
 ./scripts/start.ps1
 
-# Arrêter  
+# Stop
 ./scripts/stop.ps1
 
-# Nettoyer
+# Clean up
 ./scripts/clean.ps1
 ```
 
-Ou manuellement :
+Or manually:
 ```bash
-docker-compose up -d    # Démarrer
-docker-compose down     # Arrêter
+docker-compose up -d    # Start
+docker-compose down     # Stop
 ```
 
-## Accès
+## Access
 
-- **Application** : http://localhost:3000
-- **API** : http://localhost:3001/api/pixels
+- **Application**: http://localhost:3000
+- **API**: http://localhost:3001/api/pixels
 
 ## Structure
 
 ```
 pixelnet/
-├── backend/           # API Node.js
-├── frontend/          # Interface React  
-├── scripts/           # Scripts Docker
+├── backend/           # Node.js API
+├── frontend/          # React interface
+├── scripts/           # Docker scripts
 └── docker-compose.yml # Configuration
 ```
 
 ## API
 
-- `GET /api/pixels` - Liste des pixels
-- `POST /api/pixels` - Ajouter un pixel
-- `PUT /api/pixels/:id` - Modifier un pixel
+- `GET /api/pixels` - List pixels
+- `POST /api/pixels` - Add a pixel
+- `PUT /api/pixels/:id` - Update a pixel
 
-## Développement
+## Development
 
-Sans Docker :
+Without Docker:
 ```bash
 # Backend
 cd backend && npm install && npm start
 
-# Frontend  
+# Frontend
 cd frontend && npm install && npm start
 ```
